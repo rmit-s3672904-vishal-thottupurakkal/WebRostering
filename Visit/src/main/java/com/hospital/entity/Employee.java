@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -14,19 +15,27 @@ import javax.persistence.TemporalType;
 public class Employee {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="emp_id")
 	private int empId;
-	
 	private String firstName;
-	
 	private String lastName;
-
 	private long number;
-	
 	private String gender;
-	
+	@Column(unique=true)
+	private String email;
+	private boolean employeeActive=true;
 	@Temporal(TemporalType.DATE)
 	private Date dob;
+	@ManyToOne
+	private Role roles;
+	private String qualification;
+
+	public Role getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Role roles) {
+		this.roles = roles;
+	}
 
 	public int getEmpId() {
 		return empId;
@@ -76,24 +85,57 @@ public class Employee {
 		this.dob = dob;
 	}
 
-	public Employee(int empId, String firstName, String lastName, long number, String gender, Date dob) {
-		this.empId = empId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.number = number;
-		this.gender = gender;
-		this.dob = dob;
+	public String getEmail() {
+		return email;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public boolean isEmployeeActive() {
+		return employeeActive;
+	}
+
+	public void setEmployeeActive(boolean employeeActive) {
+		this.employeeActive = employeeActive;
+	} 
+	
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	// Constructors
 	public Employee() {
 	}
 
 	public Employee(int empId) {
 		this.empId = empId;
 	}
-	
-	
+	 
+	public Employee(String email) {
+		this.email = email;
+	}
 
+	public Employee(int empId, String firstName, String lastName, long number, String gender, String email,
+			boolean employeeActive, Date dob, Role roles, String qualification) {
+	 
+		this.empId = empId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.number = number;
+		this.gender = gender;
+		this.email = email;
+		this.employeeActive = employeeActive;
+		this.dob = dob;
+		this.roles = roles;
+		this.qualification = qualification;
+	}
 	
-
+	
+ 
 }

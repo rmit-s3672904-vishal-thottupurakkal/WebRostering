@@ -7,15 +7,19 @@ import com.hospital.entity.Employee;
 
 public interface EmployeeService {
 	
-	public List<Employee> findAll();
+public List<Employee> findAll();
 	
 	public Employee findById(int id);
 	
-	public String save(Employee employee);
+	public boolean save(Employee employee);
 	
-	public String delete(int id);
+	public boolean delete(int id);
+	
+	public boolean activeFlag(int id);
+	
+	public List<Employee> findEmployeeListOnly();
 
 	public Map<String,Object> dashboard();
 	
-	public List<?> findAllObject();
+	public Employee findByEmail(String email);
 }

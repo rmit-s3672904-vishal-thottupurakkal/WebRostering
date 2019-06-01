@@ -6,6 +6,13 @@ import com.hospital.entity.Client;
 
 public interface ClientDAO {
 
-
+	public boolean save(Client client);
+	
+	public boolean delete(int id);
+	
+	public Client findById(int id);
+	
 	public List<Client> findAll();
+	
+	
 }

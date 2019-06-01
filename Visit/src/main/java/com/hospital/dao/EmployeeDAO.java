@@ -6,16 +6,21 @@ import java.util.Map;
 import com.hospital.entity.Employee;
 
 public interface EmployeeDAO {
-
-	public List<Employee> findAll();
 	
+	public boolean save(Employee employee);
+	
+	public boolean delete(int id);
+	
+	public boolean activeFlag(int id);
+
 	public Employee findById(int id);
 	
-	public String save(Employee employee);
+	public List<Employee> findAll();
 	
-	public String delete(int id);
+	public List<Employee> findEmployeeListOnly();
 	
 	public Map<String,Object> dashboard();
-
-	public List<?> findAllObject();
+	
+	public Employee findByEmail(String email);
+	
 }

@@ -29,25 +29,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	@Transactional
-	public String save(Employee employee) {
+	public boolean save(Employee employee) {
 		return employeeDAO.save(employee);
 
 	}
 
 	@Override
 	@Transactional
-	public String delete(int id) {
+	public boolean delete(int id) {
 		return employeeDAO.delete(id);
 	}
 
 	@Override
+	@Transactional
 	public Map<String, Object> dashboard() {
 		return employeeDAO.dashboard();
 	}
 
 	@Override
-	public List<?> findAllObject() {
-		return employeeDAO.findAllObject();
+	@Transactional
+	public List<Employee> findEmployeeListOnly() {
+		return employeeDAO.findEmployeeListOnly();
+	}
+
+	@Override
+	@Transactional
+	public boolean activeFlag(int id) {
+		return employeeDAO.activeFlag(id);
+	}
+
+	@Override
+	@Transactional
+	public Employee findByEmail(String email) {
+		return employeeDAO.findByEmail(email);
 	}
 
 }

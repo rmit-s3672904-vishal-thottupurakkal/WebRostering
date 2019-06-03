@@ -8,9 +8,9 @@ import com.hospital.entity.Round;
 
 public interface RoundDAO {
 
-	public void save(Round round);
+	public boolean save(Round round);
 	
-	public void delete(int id);
+	public boolean delete(int id);
 	
 	public Round findById(int id);
 	

@@ -12,9 +12,9 @@ public List<Round> findAll();
 	
 	public Round findById(int id);
 	
-	public void save(Round round);
+	public boolean save(Round round);
 	
-	public void delete(int id);
+	public boolean delete(int id);
 	
 	public List<Round> findRoundsByDate(Date date);
 	

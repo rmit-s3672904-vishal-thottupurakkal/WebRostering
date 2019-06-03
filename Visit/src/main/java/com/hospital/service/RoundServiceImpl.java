@@ -30,15 +30,15 @@ public class RoundServiceImpl implements RoundService {
 
 	@Override
 	@Transactional
-	public void save(Round round) {
-		roundDAO.save(round);
+	public boolean save(Round round) {
+		return roundDAO.save(round);
 
 	}
 
 	@Override
 	@Transactional
-	public void delete(int id) {
-		 roundDAO.delete(id);
+	public boolean delete(int id) {
+		return roundDAO.delete(id);
 	}
 
 	@Override

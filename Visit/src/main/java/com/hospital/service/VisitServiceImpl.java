@@ -29,18 +29,19 @@ public class VisitServiceImpl implements VisitService {
 
 	@Override
 	@Transactional
-	public String save(Visit visit) {
+	public boolean save(Visit visit) {
 		return visitDAO.save(visit);
 
 	}
 
 	@Override
 	@Transactional
-	public String delete(Round round) {
+	public boolean delete(Round round) {
 		return visitDAO.delete(round);
 	}
 
 	@Override
+	@Transactional
 	public List<Visit> findByRound(Round round) {
 		return visitDAO.findByRound(round);
 	}

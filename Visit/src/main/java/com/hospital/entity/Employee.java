@@ -1,12 +1,14 @@
 package com.hospital.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,6 +30,8 @@ public class Employee {
 	@ManyToOne
 	private Role roles;
 	private String qualification;
+	@ManyToMany
+	private List<Availability> availability;
 
 	public Role getRoles() {
 		return roles;
@@ -109,6 +113,14 @@ public class Employee {
 		this.qualification = qualification;
 	}
 
+	public List<Availability> getAvailability() {
+		return availability;
+	}
+
+	public void setAvailability(List<Availability> availability) {
+		this.availability = availability;
+	}
+
 	// Constructors
 	public Employee() {
 	}
@@ -122,8 +134,8 @@ public class Employee {
 	}
 
 	public Employee(int empId, String firstName, String lastName, long number, String gender, String email,
-			boolean employeeActive, Date dob, Role roles, String qualification) {
-	 
+			boolean employeeActive, Date dob, Role roles, String qualification, List<Availability> availability) {
+		super();
 		this.empId = empId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -134,8 +146,10 @@ public class Employee {
 		this.dob = dob;
 		this.roles = roles;
 		this.qualification = qualification;
+		this.availability = availability;
 	}
-	
+
+ 
 	
  
 }

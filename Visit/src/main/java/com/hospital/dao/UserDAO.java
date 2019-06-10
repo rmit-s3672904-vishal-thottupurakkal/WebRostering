@@ -1,20 +1,19 @@
 package com.hospital.dao;
 
-import java.util.List;
-
 import com.hospital.entity.Employee;
-import com.hospital.entity.User;
+import com.hospital.entity.UserDeatil;
 
 public interface UserDAO {
-	
-	public User findByEmployee(Employee employee);
 
-	public User findByUsernameAndPassword(String username, String password);
+	public boolean save(UserDeatil user);
 	
-	public String save(User user);
+	public boolean delete(Employee emp);
 	
-	public String delete(int id);
+	public boolean activeFlag(Employee emp);
 	
-	public List<User> findAllUser();
+	public UserDeatil findByEmployee(Employee employee);
 
+	public UserDeatil findByUsernameAndPassword(String username, String password);
+	
+	public UserDeatil findByUsername(String username);
 }

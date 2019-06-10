@@ -49,6 +49,14 @@ public class ClientController {
 		
 		result.put("success",clientService.delete(id));
 		return result;
+	} 
+	
+	@GetMapping("/disableClientById/{id}")
+	public Map<String,Boolean> disableClientById(@PathVariable("id") int id) {
+		Map<String,Boolean> result = new HashMap<>();
+		
+		result.put("success",clientService.disableClient(id));
+		return result;
 	}
 	
 	@GetMapping("/getClientById/{id}")

@@ -59,11 +59,26 @@ public class ClientDAOimpl implements ClientDAO {
 	public List<Client> findAll() {
 		try {
 			Session session = entityManager.unwrap(Session.class);
-			Query<Client> query = session.createQuery("from Client", Client.class);
+			Query<Client> query = session.createQuery("from Client where active = '1'", Client.class);
 			return query.getResultList();
 		}catch(NoResultException e){
 			return new ArrayList<Client>();
 		}
+	}
+
+	@Override
+	public boolean disableClient(int id) {
+		 try {
+			 Session theSession =entityManager.unwrap(Session.class);
+			 Query<?> query = theSession.createQuery("UPDATE Client set active = :flag where clientId=:id");
+			 query.setParameter("flag", false);
+				query.setParameter("id", id);
+				query.executeUpdate();
+			 return true;
+		 }catch(Exception e) {
+			 e.printStackTrace();
+			return false;
+		 }
 	}
 
 }

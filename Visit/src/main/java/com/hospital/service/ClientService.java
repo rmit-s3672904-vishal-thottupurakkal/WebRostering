@@ -13,5 +13,6 @@ public interface ClientService {
 	public boolean save(Client client);
 	
 	public boolean delete(int id);
-
+	
+	public boolean disableClient(int id);
 }

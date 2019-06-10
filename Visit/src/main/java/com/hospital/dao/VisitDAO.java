@@ -7,14 +7,15 @@ import com.hospital.entity.Visit;
 
 public interface VisitDAO {
 
-	public List<Visit> findAll();
+	
+	public boolean save(Visit visit);
+	
+	public boolean delete(Round round);
 	
 	public Visit findById(int id);
-	
-	public String save(Visit visit);
-	
-	public String delete(Round round);
-	
+
+	public List<Visit> findAll();
+
 	public List<Visit> findByRound(Round round);
 	
 }

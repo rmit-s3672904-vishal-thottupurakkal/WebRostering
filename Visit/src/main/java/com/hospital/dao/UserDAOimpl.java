@@ -1,7 +1,5 @@
 package com.hospital.dao;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
@@ -11,76 +9,107 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.hospital.entity.Employee;
-import com.hospital.entity.User;
+import com.hospital.entity.UserDeatil;
+
 @Repository
 public class UserDAOimpl implements UserDAO {
 	
 	@Autowired
 	EntityManager entityManager;
+	
+	@Override
+	public boolean save(UserDeatil user) {
+		try {
+			Session session=entityManager.unwrap(Session.class);
+			session.saveOrUpdate(user);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+	
+	@Override
+	public UserDeatil findByUsername(String username) {
+		UserDeatil user;
+		
+		Session session = entityManager.unwrap(Session.class);
+		Query<UserDeatil> query = session.createQuery("from UserDeatil where username=:uname", UserDeatil.class);
+		query.setParameter("uname", username);
+		
+		try {
+			user=query.getSingleResult();
+		}catch(NoResultException e) {
+			user=new UserDeatil();
+		}
+		
+		return user;
+	}
 
 	@Override
-	public User findByUsernameAndPassword(String username,String password) {
-		User result;
+	public boolean delete(Employee emp) {
+		
+		try {
+			Session session=entityManager.unwrap(Session.class);
+			Query<?> query=session.createQuery("delete from UserDeatil where employee=:emp");
+			query.setParameter("emp", emp);
+			query.executeUpdate();
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public UserDeatil findByUsernameAndPassword(String username,String password) {
+		UserDeatil result;
 		
 		Session session=entityManager.unwrap(Session.class);
-		Query<User> query=session.createQuery("from User where username=:username1 AND password=:password1",User.class);
+		Query<UserDeatil> query=session.createQuery("from UserDeatil where username=:username1 AND password=:password1 AND userActive!=0 ",UserDeatil.class);
 		query.setParameter("username1", username);
 		query.setParameter("password1", password);
 		
 		try {
 			result=query.getSingleResult();
 		}catch(NoResultException e) {
-			result=new User();
+			result=new UserDeatil();
 		}
 		
 		return result;
 	}
 
-	@Override
-	public String save(User user) {
-		Session session=entityManager.unwrap(Session.class);
-		session.saveOrUpdate(user);
-		return "Saved successfully";
-	}
+
 
 	@Override
-	public String delete(int id) {
-		String result;
-		
-		try {
-			Session session=entityManager.unwrap(Session.class);
-			Query<?> query=session.createQuery("delete from User where userId=:id");
-			query.setParameter("id", id);
-			int i=query.executeUpdate();
-			result=i+"Deleted Successfully";
-		}catch(Exception e) {
-			result="Failed to delete";
-		}
-		return result;
-	}
-
-	@Override
-	public User findByEmployee(Employee employee) {
-		User result;
+	public UserDeatil findByEmployee(Employee employee) {
+		UserDeatil result;
 		
 		Session session=entityManager.unwrap(Session.class);
-		Query<User> query=session.createQuery("from User where employee=:employee1",User.class);
+		Query<UserDeatil> query=session.createQuery("from UserDeatil where employee=:employee1",UserDeatil.class);
 		query.setParameter("employee1", employee);
 		
 		try {
 			result=query.getSingleResult();
 		}catch(NoResultException e) {
-			result=new User();
+			result=new UserDeatil();
 		}
 		
 		return result;
 	}
 
 	@Override
-	public List<User> findAllUser() {
-		Session session=entityManager.unwrap(Session.class);
-		Query<User> query=session.createQuery("SELECT FROM User u JOIN Employee e ON e.empId=u.employee "
-												+ "WHERE NOT roles='1'",User.class);
- 		return query.getResultList();
+	public boolean activeFlag(Employee emp) {
+		try {
+			Session session = entityManager.unwrap(Session.class);
+			Query<?> query = session.createQuery("UPDATE UserDeatil set userActive = :flag "  + 
+		             							"WHERE employee = :emp");
+			query.setParameter("flag", false);
+			query.setParameter("emp", emp);
+			query.executeUpdate();
+			return true;
+		}catch(NoResultException e) {
+			return false;
+		}
 	}
+
+	
 }

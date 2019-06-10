@@ -23,10 +23,10 @@ public class EmailService {
 
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	
-	public boolean sendMail(Round round) {
+	public boolean sendMail(Round round,String sub) {
 		try {
 			String to =round.getEmployee().getEmail(); ;
-			String subject = " New Shift allocated on " + simpleDateFormat.format(round.getDate());
+			String subject = sub + simpleDateFormat.format(round.getDate());
 			// get and fill the template
 			final Context context = new Context();
 			context.setVariable("round", round);

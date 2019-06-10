@@ -17,7 +17,7 @@ public class Client {
 	private String lastName;
 	private Date dob;
 	private String gender;
-	
+	private Boolean active=true;
 	
 	public int getClientId() {
 		return clientId;
@@ -48,6 +48,14 @@ public class Client {
 	}
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+	
+	
+	public Boolean getActive() {
+		return active;
+	}
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 	
 	

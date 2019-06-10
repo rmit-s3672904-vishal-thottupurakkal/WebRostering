@@ -50,7 +50,7 @@ public class RoundController {
 		
 		Employee emp=employeeService.findById(round.getEmployee().getEmpId());
 		round.setEmployee(emp);
-		emailService.sendMail(round);
+		emailService.sendMail(round,"New Round has been created ");
 	
 	}
 	
@@ -64,6 +64,10 @@ public class RoundController {
 			temp.setVisitId(0);
 
 		roundService.save(round);
+		
+		Employee emp=employeeService.findById(round.getEmployee().getEmpId());
+		round.setEmployee(emp);
+		emailService.sendMail(round,"Your Round has been updated ");
 
 	}
 

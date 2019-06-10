@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hospital.entity.Employee;
-import com.hospital.entity.User;
+import com.hospital.entity.UserDeatil;
 import com.hospital.service.EmployeeService;
 import com.hospital.service.UserService;
 import com.hospital.service.VisitService;
@@ -37,7 +37,7 @@ public class EmployeeController {
 		employee.setEmpId(0);
 		employeeService.save(employee);
 
-		userService.save(new User(0, employee.getEmail(), employee));
+		userService.save(new UserDeatil(0, employee.getEmail(), employee));
 
 	}
 
@@ -85,26 +85,26 @@ public class EmployeeController {
 
 	// Login Screen
 	@PostMapping("/getUser")
-	public User getUser(@RequestBody User user) {
+	public UserDeatil getUser(@RequestBody UserDeatil user) {
 
 		return userService.findByUsernameAndPassword(user.getUsername(), user.getPassword());
 
 	}
 	
 	@PostMapping("/userCheckExist")
-	public User userCheckExist(@RequestBody User user) {
+	public UserDeatil userCheckExist(@RequestBody UserDeatil user) {
 		return userService.findByUsername(user.getUsername());
 	}
 
 	@PutMapping("/updateUser")
-	public void updateUser(@RequestBody User user) {
+	public void updateUser(@RequestBody UserDeatil user) {
 		userService.save(user);
 
 	}
 
 	// For individual Employee Login
 	@PostMapping("/getUserByEmployee")
-	public User getUserByEmployee(@RequestBody Employee employee) {
+	public UserDeatil getUserByEmployee(@RequestBody Employee employee) {
 
 		return userService.findByEmployee(employee);
 

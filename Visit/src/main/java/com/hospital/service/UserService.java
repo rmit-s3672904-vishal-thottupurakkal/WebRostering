@@ -1,19 +1,20 @@
+
 package com.hospital.service;
 
-import java.util.List;
-
 import com.hospital.entity.Employee;
-import com.hospital.entity.User;
+import com.hospital.entity.UserDeatil;
 
 public interface UserService {
 	
-	public User findByEmployee(Employee employee);
+	public UserDeatil findByEmployee(Employee employee);
 	
-	public User findByUsernameAndPassword(String username, String password);
+	public UserDeatil findByUsernameAndPassword(String username, String password);
 	
-	public String save(User user);
+	public boolean save(UserDeatil user);
 	
-	public String delete(int id);
+	public boolean delete(Employee emp);
 
-	public List<User> findAllUser();
+	public boolean activeFlag(Employee emp);
+
+	public UserDeatil findByUsername(String username);
 }

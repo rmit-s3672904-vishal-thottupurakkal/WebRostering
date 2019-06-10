@@ -1,7 +1,6 @@
 package com.hospital.entity;
 
 import java.time.LocalTime;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,11 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Visit {
@@ -21,23 +17,16 @@ public class Visit {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int visitId;
 	private String client;
-//	@Temporal(TemporalType.TIMESTAMP)
 	private LocalTime startTime;
-//	@Temporal(TemporalType.TIMESTAMP)
 	private LocalTime endTime;
-	private String address;
 	private double duration;
+	private String address;
 	private boolean status;
-	private String FTAreason;
-	private int cost;
+	private String ftareason;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonBackReference
 	private Round round;
-	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="visitList")
-	@JsonManagedReference
-	private List<Client> clientList;
 
 	public int getVisitId() {
 		return visitId;
@@ -55,6 +44,7 @@ public class Visit {
 		this.client = client;
 	}
 
+	
 	public LocalTime getStartTime() {
 		return startTime;
 	}
@@ -71,13 +61,6 @@ public class Visit {
 		this.endTime = endTime;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
 
 	public double getDuration() {
 		return duration;
@@ -96,19 +79,11 @@ public class Visit {
 	}
 
 	public String getFTAreason() {
-		return FTAreason;
+		return ftareason;
 	}
 
 	public void setFTAreason(String fTAreason) {
-		FTAreason = fTAreason;
-	}
-
-	public int getCost() {
-		return cost;
-	}
-
-	public void setCost(int cost) {
-		this.cost = cost;
+		ftareason = fTAreason;
 	}
 
 	public Round getRound() {
@@ -117,36 +92,30 @@ public class Visit {
 
 	public void setRound(Round round) {
 		this.round = round;
+	} 
+	public String getAddress() {
+		return address;
 	}
 
-	public List<Client> getClientList() {
-		return clientList;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public void setClientList(List<Client> clientList) {
-		this.clientList = clientList;
+	public Visit() {
 	}
 
-	public Visit(int visitId, String client, LocalTime startTime, LocalTime endTime, String address, double duration,
-			boolean status, String fTAreason, int cost, Round round, List<Client> clientList) {
-		
+	public Visit(int visitId, String client, LocalTime startTime, LocalTime endTime, double duration, String address,
+			boolean status, String ftareason, Round round) {
+		 
 		this.visitId = visitId;
 		this.client = client;
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.address = address;
 		this.duration = duration;
+		this.address = address;
 		this.status = status;
-		this.FTAreason = fTAreason;
-		this.cost = cost;
+		this.ftareason = ftareason;
 		this.round = round;
-		this.clientList = clientList;
 	}
-
-	public Visit() {
-		
-	}
-
-
-
+ 
 }

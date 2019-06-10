@@ -14,5 +14,5 @@ public interface ClientDAO {
 	
 	public List<Client> findAll();
 	
-	
+	public boolean disableClient(int id);
 }

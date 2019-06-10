@@ -1,14 +1,12 @@
 package com.hospital.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.hospital.dao.UserDAO;
 import com.hospital.entity.Employee;
-import com.hospital.entity.User;
+import com.hospital.entity.UserDeatil;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,34 +17,41 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public User findByUsernameAndPassword(String username, String password) {
+	public UserDeatil findByUsernameAndPassword(String username, String password) {
 		return userDAO.findByUsernameAndPassword(username, password);
 	}
 
 	@Override
 	@Transactional
-	public String save(User user) {
+	public boolean save(UserDeatil user) {
 		return userDAO.save(user);
 
 	}
 
 	@Override
 	@Transactional
-	public String delete(int id) {
-		return userDAO.delete(id);
+	public boolean delete(Employee emp) {
+		return userDAO.delete(emp);
 	}
 
 	@Override
-	public User findByEmployee(Employee employee) {
+	@Transactional
+	public boolean activeFlag(Employee emp) {
+		return userDAO.activeFlag(emp);
+	}
+	
+	@Override
+	@Transactional
+	public UserDeatil findByEmployee(Employee employee) {
 		
 		return userDAO.findByEmployee(employee);
 	}
 
 	@Override
-	public List<User> findAllUser() {
-		return userDAO.findAllUser();
+	public UserDeatil findByUsername(String username) {
+		return userDAO.findByUsername(username);
 	}
-	
+
 	
 
 }

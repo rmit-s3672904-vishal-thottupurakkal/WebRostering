@@ -121,7 +121,7 @@ public class EmployeeDAOimpl implements EmployeeDAO {
 	@Override
 	public Map<String, Object> dashboard() {
 		Session session = entityManager.unwrap(Session.class);
-		Query<?> query = session.createQuery("SELECT count(empId) FROM Employee");
+		Query<?> query = session.createQuery("SELECT count(empId) FROM Employee where employeeActive='1' ");
 		Object empCount = query.getSingleResult();
 
 		query = session.createQuery("SELECT count(roundId) FROM Round");
@@ -130,7 +130,7 @@ public class EmployeeDAOimpl implements EmployeeDAO {
 		query = session.createQuery("SELECT count(visitId) FROM Visit");
 		Object visitCount = query.getSingleResult();
 
-		query = session.createQuery("SELECT count(distinct clientId) FROM Client");
+		query = session.createQuery("SELECT count(distinct clientId) FROM Client where active='1' ");
 		Object clientCount = query.getSingleResult();
 
 		System.out.println(
